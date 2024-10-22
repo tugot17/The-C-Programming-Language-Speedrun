@@ -1,9 +1,9 @@
+//gcc c_keywords.c getword.c
+
 #include <stdio.h>
 #include <ctype.h>
 #include <string.h>
-
-#define MAXWORD 100
-#define BUFSIZE 100 // Buffer size for ungetch
+#include "getword.h"
 #define NKEYS (sizeof(keytab) / sizeof(struct key)) // Number of keywords
 
 struct key {
@@ -22,48 +22,6 @@ struct key {
     { "volatile", 0 },
     { "while", 0 }
 };
-
-char buf[BUFSIZE]; // Buffer for ungetch
-int bufp = 0;      // Next free position in buf
-
-int getch(void) {
-    return (bufp > 0) ? buf[--bufp] : getchar();
-}
-
-void ungetch(int c) {
-    if (bufp >= BUFSIZE) {
-        printf("ungetch: too many characters\n");
-    } else {
-        buf[bufp++] = c;
-    }
-}
-
-int getword(char *word, int lim) {
-    int c;
-    char *w = word;
-
-    while (isspace(c = getch()))
-        ;
-
-    if (c != EOF)
-        *w++ = c;
-
-    if (!isalpha(c)) {
-        *w = '\0';
-        return c;
-    }
-
-    for (; --lim > 0; w++) {
-        *w = getch(); // Get the next character
-        if (!isalnum(*w)) { // If not alphanumeric
-            ungetch(*w); // Push it back
-            break;
-        }
-    }
-    
-    *w = '\0'; // Null-terminate the string
-    return word[0]; // Return the first character of the word
-}
 
 int binsearch(char *word, struct key tab[], int n) {
     int cond;
