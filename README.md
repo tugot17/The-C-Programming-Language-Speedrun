@@ -1,6 +1,7 @@
 # The-C-Programming-Language-Speedrun
 Speedrunning over the weekend through The C Programming Language book
 
+![alt text](./image.jpg)
 
 ## Running the programs
 
