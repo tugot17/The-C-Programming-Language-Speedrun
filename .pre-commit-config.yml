@@ -1,0 +1,24 @@
+# .pre-commit-config.yaml
+repos:
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
+    hooks:
+    -   id: trailing-whitespace
+    -   id: end-of-file-fixer
+    -   id: check-yaml
+    -   id: check-added-large-files
+-   repo: https://github.com/pocc/pre-commit-hooks
+    rev: v1.3.5
+    hooks:
+    -   id: clang-format
+        args: [--style=Google]
+    -   id: clang-tidy
+    -   id: cppcheck
+-   repo: local
+    hooks:
+    -   id: splint
+        name: Splint
+        entry: splint
+        language: system
+        files: \.(c|h)$
+        args: ["-weak", "-warnposix"]
