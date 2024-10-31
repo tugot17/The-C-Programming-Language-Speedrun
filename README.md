@@ -1,5 +1,5 @@
 # The-C-Programming-Language-Speedrun
-Speedrunning over the weekend over The C Programming Language book
+Speedrunning over the weekend through The C Programming Language book
 
 
 ## Running the programs
